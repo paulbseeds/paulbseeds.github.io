@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>快猫记录生活记你世界-记录日常点滴与生活分享平台</title>
+<meta name="description" content="快猫记录生活记你世界是一个专注于生活记录与分享的平台，帮助你用文字、图片和心情记录日常点滴，整理生活瞬间，发现平凡日子里的温暖与意义。">
+<meta name="keywords" content="快猫记录生活记你世界,生活记录,日常分享,生活日记,记录生活,生活点滴,心情记录">
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+<style>
+  :root{
+    --bg:#fdf9f3;
+    --bg-soft:#f6efe4;
+    --ink:#2f2a24;
+    --ink-soft:#6b6258;
+    --line:#e6dccd;
+    --accent:#e8843c;
+    --accent-deep:#c9642a;
+    --accent-soft:#fbe6d4;
+    --green:#5f8d6b;
+    --card:#ffffff;
+    --radius:16px;
+    --shadow:0 8px 24px rgba(120,95,60,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.75;
+    font-size:16px;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+
+  /* 顶部 */
+  .topbar{
+    background:linear-gradient(120deg,#fff4e8,#fde8d6);
+    border-bottom:1px solid var(--line);
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .topbar .wrap{
+    max-width:1140px;margin:0 auto;padding:8px 20px;
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  }
+  .topbar span{white-space:nowrap;}
+
+  header.site-header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(253,249,243,.94);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:1140px;margin:0 auto;padding:14px 20px;
+    display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-mark{
+    width:42px;height:42px;border-radius:13px;
+    background:linear-gradient(135deg,var(--accent),#f0ab6a);
+    display:grid;place-items:center;
+    color:#fff;font-weight:700;font-size:19px;
+    box-shadow:0 6px 14px rgba(232,132,60,.32);
+  }
+  .brand-text b{display:block;font-size:17px;letter-spacing:.5px;}
+  .brand-text small{color:var(--ink-soft);font-size:12px;letter-spacing:1px;}
+
+  nav.main-nav{display:flex;gap:6px;flex-wrap:wrap;}
+  nav.main-nav a{
+    padding:7px 14px;border-radius:999px;font-size:14.5px;color:var(--ink-soft);
+    transition:.2s;
+  }
+  nav.main-nav a:hover,nav.main-nav a.active{
+    background:var(--accent-soft);color:var(--accent-deep);
+  }
+  .header-cta{
+    background:var(--accent);color:#fff;padding:9px 20px;border-radius:999px;
+    font-size:14px;font-weight:600;box-shadow:0 6px 16px rgba(232,132,60,.3);
+    transition:.2s;white-space:nowrap;
+  }
+  .header-cta:hover{background:var(--accent-deep);}
+
+  /* 首屏 */
+  .hero{
+    max-width:1140px;margin:0 auto;padding:52px 20px 40px;
+    display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(26px,3.6vw,40px);
+    line-height:1.35;font-weight:800;letter-spacing:.5px;
+  }
+  .hero h1 em{
+    font-style:normal;color:var(--accent-deep);
+    background:linear-gradient(transparent 62%,var(--accent-soft) 62%);
+    padding:0 2px;
+  }
+  .hero p.lead{
+    margin-top:18px;color:var(--ink-soft);font-size:16.5px;max-width:560px;
+  }
+  .hero-actions{margin-top:26px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;padding:12px 26px;border-radius:999px;font-size:15px;font-weight:600;
+    transition:.2s;border:1px solid transparent;
+  }
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px rgba(232,132,60,.28);}
+  .btn-primary:hover{background:var(--accent-deep);transform:translateY(-1px);}
+  .btn-ghost{border-color:var(--line);color:var(--ink-soft);background:#fff;}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent-deep);}
+
+  .hero-note{
+    margin-top:26px;display:flex;gap:22px;flex-wrap:wrap;font-size:13.5px;color:var(--ink-soft);
+  }
+  .hero-note b{color:var(--accent-deep);font-size:16px;display:block;}
+
+  .hero-panel{
+    background:var(--card);border:1px solid var(--line);border-radius:22px;
+    padding:24px;box-shadow:var(--shadow);
+  }
+  .hero-panel h3{font-size:16px;margin-bottom:14px;}
+  .moment{
+    display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line);
+  }
+  .moment:last-child{border-bottom:none;}
+  .moment .dot{
+    width:34px;height:34px;border-radius:11px;flex:0 0 auto;
+    display:grid;place-items:center;font-size:15px;
+    background:var(--accent-soft);color:var(--accent-deep);
+  }
+  .moment p{font-size:13.5px;color:var(--ink-soft);}
+  .moment p b{color:var(--ink);font-weight:600;display:block;font-size:14.5px;margin-bottom:2px;}
+
+  /* 通用区块 */
+  section.block{max-width:1140px;margin:0 auto;padding:44px 20px;}
+  .block-head{
+    display:flex;align-items:flex-end;justify-content:space-between;gap:16px;
+    margin-bottom:24px;flex-wrap:wrap;
+  }
+  .block-head h2{font-size:23px;font-weight:800;letter-spacing:.5px;}
+  .block-head h2 span{
+    display:inline-block;width:8px;height:22px;border-radius:4px;
+    background:var(--accent);margin-right:10px;vertical-align:-3px;
+  }
+  .block-head p{color:var(--ink-soft);font-size:14px;}
+
+  /* 记录方式 */
+  .ways{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .way{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 20px;transition:.25s;
+  }
+  .way:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#f0d9c0;}
+  .way .ico{
+    width:44px;height:44px;border-radius:13px;display:grid;place-items:center;
+    font-size:20px;margin-bottom:14px;background:var(--bg-soft);
+  }
+  .way h3{font-size:16px;margin-bottom:8px;}
+  .way p{font-size:13.8px;color:var(--ink-soft);}
+
+  /* 记录场景 / 主题 */
+  .themes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .theme-card{
+    border-radius:var(--radius);padding:24px;color:#fff;min-height:172px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    position:relative;overflow:hidden;
+  }
+  .theme-card:nth-child(1){background:linear-gradient(135deg,#e8843c,#f2b077);}
+  .theme-card:nth-child(2){background:linear-gradient(135deg,#5f8d6b,#8fb79a);}
+  .theme-card:nth-child(3){background:linear-gradient(135deg,#7a6bb0,#a79ad6);}
+  .theme-card:nth-child(4){background:linear-gradient(135deg,#c9642a,#e08a52);}
+  .theme-card:nth-child(5){background:linear-gradient(135deg,#4f7fa8,#84aecf);}
+  .theme-card:nth-child(6){background:linear-gradient(135deg,#a8763f,#cfa276);}
+  .theme-card h3{font-size:17px;font-weight:700;}
+  .theme-card p{font-size:13.5px;opacity:.92;margin-top:8px;}
+  .theme-card .tag{
+    align-self:flex-start;font-size:12px;background:rgba(255,255,255,.22);
+    padding:3px 12px;border-radius:999px;margin-bottom:12px;
+  }
+
+  /* 步骤 */
+  .steps{
+    background:var(--bg-soft);border-radius:24px;padding:36px 30px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
+  }
+  .step{position:relative;}
+  .step .num{
+    font-size:26px;font-weight:800;color:var(--accent);letter-spacing:1px;
+    font-family:Georgia,serif;
+  }
+  .step h3{font-size:15.5px;margin:8px 0 6px;}
+  .step p{font-size:13.5px;color:var(--ink-soft);}
+
+  /* 内容 + 侧栏 */
+  .split{
+    max-width:1140px;margin:0 auto;padding:44px 20px;
+    display:grid;grid-template-columns:1.6fr 1fr;gap:34px;align-items:start;
+  }
+  .article-list{display:flex;flex-direction:column;gap:16px;}
+  .post{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px;transition:.2s;
+  }
+  .post:hover{border-color:#f0d9c0;box-shadow:var(--shadow);}
+  .post .meta{
+    font-size:12.5px;color:var(--ink-soft);display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px;
+  }
+  .post .meta .cat{color:var(--accent-deep);background:var(--accent-soft);padding:1px 10px;border-radius:999px;}
+  .post h3{font-size:17px;margin-bottom:8px;}
+  .post p{font-size:14px;color:var(--ink-soft);}
+
+  aside.sidebar{display:flex;flex-direction:column;gap:20px;}
+  .side-card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;
+  }
+  .side-card h3{font-size:16px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line);}
+  .side-card ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+  .side-card li{font-size:14px;color:var(--ink-soft);display:flex;gap:9px;align-items:flex-start;}
+  .side-card li i{
+    font-style:normal;color:var(--accent);font-weight:700;font-size:13px;flex:0 0 auto;
+    background:var(--accent-soft);width:20px;height:20px;border-radius:6px;
+    display:grid;place-items:center;margin-top:3px;
+  }
+  .tip-box{
+    background:linear-gradient(135deg,#fff6ec,#fdeada);
+    border:1px solid #f4dcc2;border-radius:var(--radius);padding:20px;
+  }
+  .tip-box h3{font-size:15px;margin-bottom:8px;color:var(--accent-deep);}
+  .tip-box p{font-size:13.5px;color:var(--ink-soft);}
+
+  /* FAQ */
+  .faq{max-width:900px;margin:0 auto;}
+  .faq-item{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px 22px;margin-bottom:12px;
+  }
+  .faq-item h3{
+    font-size:15.5px;display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;
+  }
+  .faq-item h3 b{color:var(--accent);flex:0 0 auto;}
+  .faq-item p{font-size:14px;color:var(--ink-soft);padding-left:24px;}
+
+  /* 页脚 */
+  footer.site-footer{
+    margin-top:40px;background:#2f2a24;color:#cfc6ba;padding:46px 20px 26px;
+  }
+  .footer-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;}
+  .footer-inner h4{color:#fff;font-size:15px;margin-bottom:14px;}
+  .footer-inner p,.footer-inner li{font-size:13.5px;line-height:2;color:#b3a99c;}
+  .footer-inner ul{list-style:none;}
+  .footer-inner a:hover{color:#f0ab6a;}
+  .footer-bottom{
+    max-width:1140px;margin:30px auto 0;padding-top:18px;border-top:1px solid #453e35;
+    font-size:12.5px;color:#8d8478;text-align:center;line-height:1.9;
+  }
+
+  /* 响应式 */
+  @media (max-width:980px){
+    .hero{grid-template-columns:1fr;padding-top:36px;}
+    .ways{grid-template-columns:repeat(2,1fr);}
+    .themes{grid-template-columns:repeat(2,1fr);}
+    .steps{grid-template-columns:repeat(2,1fr);}
+    .split{grid-template-columns:1fr;}
+    .footer-inner{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:600px){
+    .header-inner{padding:12px 16px;}
+    nav.main-nav{order:3;width:100%;justify-content:flex-start;overflow-x:auto;}
+    nav.main-nav a{white-space:nowrap;}
+    .hero{padding:28px 16px 30px;}
+    section.block,.split{padding:30px 16px;}
+    .ways,.themes,.steps{grid-template-columns:1fr;}
+    .steps{padding:26px 20px;}
+    .footer-inner{grid-template-columns:1fr;}
+    .brand-text small{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>📖 记录是给未来的自己写信</span>
+    <span>快猫记录生活记你世界 · 生活记录与分享</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark">猫</div>
+      <div class="brand-text">
+        <b>快猫记录生活</b>
+        <small>记你世界 · 点滴日常</small>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <a href="#ways" class="active">记录方式</a>
+      <a href="#themes">生活主题</a>
+      <a href="#how">怎么开始</a>
+      <a href="#feed">记录分享</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+    <a href="#how" class="header-cta">开始记录</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- 首屏 -->
+  <section class="hero">
+    <div>
+      <h1>快猫记录生活记你世界<br><em>把普通日子，认真留下来</em></h1>
+      <p class="lead">
+        生活里值得记住的，往往不是大事，而是一顿刚好合口味的晚饭、一次傍晚的散步、一句突然想说却没人听的话。
+        快猫记录生活记你世界，围绕生活记录这件事，帮你找到顺手的方式、合适的节奏，让记录不再是负担，而是每天愿意做的一件小事。
+      </p>
+      <div class="hero-actions">
+        <a href="#ways" class="btn btn-primary">看看怎么记录</a>
+        <a href="#how" class="btn btn-ghost">从今天开始</a>
+      </div>
+      <div class="hero-note">
+        <div><b>文字 / 图片</b>多种记录形式</div>
+        <div><b>日常 / 心情</b>覆盖常见场景</div>
+        <div><b>长期 / 碎片</b>适配不同节奏</div>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <h3>今天可以记下的几件小事</h3>
+      <div class="moment">
+        <div class="dot">☀</div>
+        <p><b>清晨</b>窗外光线很好，泡了杯茶，决定今天慢一点。</p>
+      </div>
+      <div class="moment">
+        <div class="dot">🍜</div>
+        <p><b>中午</b>试了新的小馆子，味道比想象中好。</p>
+      </div>
+      <div class="moment">
+        <div class="dot">🌿</div>
+        <p><b>傍晚</b>绕小区走了两圈，风是凉的。</p>
+      </div>
+      <div class="moment">
+        <div class="dot">✎</div>
+        <p><b>睡前</b>写下三句话，给今天画个句号。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 记录方式 -->
+  <section class="block" id="ways">
+    <div class="block-head">
+      <h2><span></span>几种顺手的生活记录方式</h2>
+      <p>不必都做，挑一种能坚持的就好</p>
+    </div>
+    <div class="ways">
+      <div class="way">
+        <div class="ico">✍️</div>
+        <h3>文字日记</h3>
+        <p>用几行字写下当天发生的事和感受，不追求文采，只求真实。适合喜欢安静整理思绪的人。</p>
+      </div>
+      <div class="way">
+        <div class="ico">📷</div>
+        <h3>图片随手拍</h3>
+        <p>拍下让你停下来的画面，配一句短说明。时间久了，照片本身就会串成一条生活线。</p>
+      </div>
+      <div class="way">
+        <div class="ico">🎧</div>
+        <h3>语音片段</h3>
+        <p>不方便打字时，用一段语音把当下的想法说出来，之后再回听，往往会有新的感受。</p>
+      </div>
+      <div class="way">
+        <div class="ico">✅</div>
+        <h3>清单式记录</h3>
+        <p>用条目记下今天做了什么、吃了什么、见了谁。简单直接，适合节奏快、时间少的日子。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 生活主题 -->
+  <section class="block" id="themes">
+    <div class="block-head">
+      <h2><span></span>可以记录的生活主题</h2>
+      <p>从身边熟悉的部分开始，最容易坚持</p>
+    </div>
+    <div class="themes">
+      <div class="theme-card">
+        <span class="tag">日常</span>
+        <div>
+          <h3>一日三餐</h3>
+          <p>记录吃了什么、在哪吃、和谁一起。饮食是最容易被忽略，也最容易回忆的生活线索。</p>
+        </div>
+      </div>
+      <div class="theme-card">
+        <span class="tag">心情</span>
+        <div>
+          <h3>情绪与感受</h3>
+          <p>开心、疲惫、烦躁、平静，写下来之后，情绪往往就不再那么堵在心里。</p>
+        </div>
+      </div>
+      <div class="theme-card">
+        <span class="tag">出行</span>
+        <div>
+          <h3>路上的风景</h3>
+          <p>通勤、散步、短途旅行，记录走过的地方和当时看到的东西。</p>
+        </div>
+      </div>
+      <div class="theme-card">
+        <span class="tag">成长</span>
+        <div>
+          <h3>学习与工作</h3>
+          <p>今天学会了什么、卡在哪里、有什么小进展，长期看会形成自己的成长轨迹。</p>
+        </div>
+      </div>
+      <div class="theme-card">
+        <span class="tag">关系</span>
+        <div>
+          <h3>与人的相处</h3>
+          <p>一次聊天、一句关心、一场久别重逢，都值得被认真记下来。</p>
+        </div>
+      </div>
+      <div class="theme-card">
+        <span class="tag">兴趣</span>
+        <div>
+          <h3>喜欢的事</h3>
+          <p>看过的书、听过的歌、养的花、拼的模型，兴趣是生活里柔软的部分。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 步骤 -->
+  <section class="block" id="how">
+    <div class="block-head">
+      <h2><span></span>从零开始，四步养成记录习惯</h2>
+      <p>重点是开始，而不是完美</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">01</div>
+        <h3>选一个固定时间</h3>
+        <p>睡前十分钟、午休后、通勤路上都可以。固定时间能降低“要不要记”的犹豫成本。</p>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <h3>只写三句话</h3>
+        <p>刚开始不用长篇大论。今天做了什么、感觉如何、想记住什么，三句话足够。</p>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <h3>允许断更</h3>
+        <p>漏了几天不代表失败。记录是为了自己，不是打卡任务，随时可以重新开始。</p>
+      </div>
+      <div class="step">
+        <div class="num">04</div>
+        <h3>偶尔回头翻看</h3>
+        <p>隔一段时间回看旧记录，你会发现自己经历过比想象中更多的事。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 内容 + 侧栏 -->
+  <div class="split" id="feed">
+    <div>
+      <div class="block-head">
+        <h2><span></span>记录分享与经验</h2>
+        <p>关于怎么记、记什么的一些想法</p>
+      </div>
+      <div class="article-list">
+        <article class="post">
+          <div class="meta"><span class="cat">方法</span><span>记录习惯</span></div>
+          <h3>记录生活，不需要等到“值得写”的那一天</h3>
+          <p>很多人放弃记录，是因为觉得今天没什么特别。但生活本来就是由普通日子组成的，把普通写下来，回头看才知道它并不普通。降低标准，反而更容易坚持。</p>
+        </article>
+        <article class="post">
+          <div class="meta"><span class="cat">心情</span><span>情绪整理</span></div>
+          <h3>把情绪写出来，是一种温和的整理方式</h3>
+          <p>情绪在脑子里打转时容易越想越乱，写下来会变得具体。不需要解决什么，只是让它有一个被看见的地方，人就会松一点。</p>
+        </article>
+        <article class="post">
+          <div class="meta"><span class="cat">场景</span><span>日常细节</span></div>
+          <h3>从三餐和天气开始，最容易上手</h3>
+          <p>不知道写什么的时候，就从今天吃了什么、天气怎么样开始。这类细节看似琐碎，却是回忆里最有画面感的部分。</p>
+        </article>
+        <article class="post">
+          <div class="meta"><span class="cat">工具</span><span>形式选择</span></div>
+          <h3>文字、图片还是语音？按自己的状态来</h3>
+          <p>精力好时写几段文字，累了就拍张照片配一句话，不方便打字就录一段语音。形式不必统一，能留下痕迹就好。</p>
+        </article>
+        <article class="post">
+          <div class="meta"><span class="cat">长期</span><span>回看价值</span></div>
+          <h3>记录的意义，往往在很久以后才显现</h3>
+          <p>当下写下的内容，可能只是随手一记。但一年、三年后再看，它会告诉你当时在想什么、在意什么、走过了哪些路。</p>
+        </article>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="side-card">
+        <h3>新手记录小建议</h3>
+        <ul>
+          <li><i>1</i>先定一个最小目标，比如每天一句话</li>
+          <li><i>2</i>把记录入口放在随手能打开的位置</li>
+          <li><i>3</i>不用修饰语言，真实比好看重要</li>
+          <li><i>4</i>内容私密或公开，按自己舒服来</li>
+          <li><i>5</i>断更了就直接继续，不用补写</li>
+        </ul>
+      </div>
+      <div class="tip-box">
+        <h3>关于隐私的一点提醒</h3>
+        <p>记录里可能包含住址、行程、家人信息等个人内容。如果要分享出来，建议先确认是否涉及隐私，必要时做模糊处理，或只保留给自己看。</p>
+      </div>
+      <div class="side-card">
+        <h3>适合记录的时刻</h3>
+        <ul>
+          <li><i>·</i>刚睡醒，脑子还安静的时候</li>
+          <li><i>·</i>午休，随手写两句当下感受</li>
+          <li><i>·</i>下班路上，把一天过一遍</li>
+          <li><i>·</i>睡前，给今天收个尾</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- FAQ -->
+  <section class="block" id="faq">
+    <div class="block-head">
+      <h2><span></span>常见问题</h2>
+      <p>关于生活记录，你可能想知道的</p>
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <h3><b>Q</b>完全没有写作习惯，能坚持记录吗？</h3>
+        <p>可以。记录不等于写作，一句话、一张图、一段语音都算。把门槛降到最低，先做起来，习惯比内容质量更重要。</p>
+      </div>
+      <div class="faq-item">
+        <h3><b>Q</b>记录的内容需要公开吗？</h3>
+        <p>不需要。记录首先是给自己看的，公开与否完全取决于你的意愿。很多人只做私人记录，同样很有价值。</p>
+      </div>
+      <div class="faq-item">
+        <h3><b>Q</b>断更很久了，还有必要重新开始吗？</h3>
+        <p>有必要。记录没有连续性的要求，从今天重新写下第一句就好。中断本身也是生活的一部分。</p>
+      </div>
+      <div class="faq-item">
+        <h3><b>Q</b>记录生活真的有用吗？</h3>
+        <p>它的作用通常不是立刻见效的。长期来看，它能帮你更清楚地看到自己的状态变化，也能留下一些日后会想重温的片段。</p>
+      </div>
+      <div class="faq-item">
+        <h3><b>Q</b>每天都要记吗？</h3>
+        <p>不必。有人每天记，有人一周记两三次，都可以。找到自己舒服的频率，比追求数量更有意义。</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h4>快猫记录生活记你世界</h4>
+      <p>一个围绕生活记录与日常分享的内容站点，关注普通日子里的细节、情绪与成长，帮助每个人找到适合自己的记录方式。</p>
+    </div>
+    <div>
+      <h4>内容导航</h4>
+      <ul>
+        <li><a href="#ways">记录方式</a></li>
+        <li><a href="#themes">生活主题</a></li>
+        <li><a href="#how">怎么开始</a></li>
+        <li><a href="#feed">记录分享</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>记录方向</h4>
+      <ul>
+        <li>日常三餐</li>
+        <li>心情感受</li>
+        <li>出行风景</li>
+        <li>兴趣与成长</li>
+      </ul>
+    </div>
+    <div>
+      <h4>温馨提示</h4>
+      <ul>
+        <li>记录内容请自行备份</li>
+        <li>分享前注意隐私保护</li>
+        <li>保持适合自己的节奏</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 快猫记录生活记你世界 · 记录日常点滴，留住生活本身。<br>
+    本站内容为生活记录相关经验与建议分享，请结合自身情况参考。
+  </div>
+</footer>
+
+<script>
+  // 导航平滑高亮
+  (function(){
+    var links = document.querySelectorAll('nav.main-nav a');
+    links.forEach(function(link){
+      link.addEventListener('click', function(){
+        links.forEach(function(l){ l.classList.remove('active'); });
+        link.classList.add('active');
+      });
+    });
+  })();
+</script>
+
+</body>
+    </html>
